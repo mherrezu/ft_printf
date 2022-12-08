@@ -6,16 +6,14 @@
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:33:28 by mherrezu          #+#    #+#             */
-/*   Updated: 2022/12/06 13:46:52 by mherrezu         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:26:20 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_putchar(int a)
+void	ft_putchar(char a, int *len)
 {
-	int	b;
-
-	b = a + 48;
-	write (1, &b, 1);
+	write (1, &a, 1);
+	*len += 1;
 }

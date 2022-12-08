@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 11:44:18 by mherrezu          #+#    #+#             */
-/*   Updated: 2022/12/08 18:09:19 by mherrezu         ###   ########.fr       */
+/*   Created: 2022/11/28 17:57:58 by mherrezu          #+#    #+#             */
+/*   Updated: 2022/12/08 18:18:12 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_putnbr(int nb, int *len)
-{
-	if (nb == -2147483648)
-	{
-		ft_putstr("-2147483648", len);
-	}
-	else if (nb < 0)
-	{
-		ft_putchar('-', len);
-		ft_putnbr(-nb, len);
-	}
-	else if (nb <= 9)
-	{
-		ft_putchar(nb + '0', len);
-	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10, len);
-		ft_putchar(nb % 10 + '0', len);
-	}
-}
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdarg.h>
+
+int		ft_printf(char const *str, ...);
+void	ft_putchar(char a, int *len);
+void	ft_puthex(unsigned long int nb, char *base, int *len);
+void	ft_putnbr(int nb, int *len);
+void	ft_putstr(char *str, int *len);
+void	ft_putunsigned(unsigned int nb, int *len);
+
+#endif

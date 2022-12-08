@@ -5,54 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 16:24:00 by mherrezu          #+#    #+#             */
-/*   Updated: 2022/12/06 13:44:05 by mherrezu         ###   ########.fr       */
+/*   Created: 2022/12/08 11:46:10 by mherrezu          #+#    #+#             */
+/*   Updated: 2022/12/08 18:34:46 by mherrezu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "ft_printf.h"
 
-int	conversion(va_arg arg, char const *str)
+void	conversion(char const c, va_list arg, int *len)
 {
-	int	len;
-
-	if (str == 'c')
-		ft_putchar();
-	else if (str == 's')
-		ft_putstr();
-	else if (str == 'p')
-		ft_putptr();
-	else if (str == 'd')
-		ft_putnbr();
-	else if (str == 'i')
-		ft_putnbr();
-	else if (str == 'u')
-		ft_putunsigned();
-	else if (str == 'x' || str == 'X')
-		ft_puthex();
-	else if (str == '%')
-		ft_putchar('%');
-	return (len);
+	if (c == 'c')
+		ft_putchar(va_arg(arg, int), len);
+	if (c == 's')
+		ft_putstr(va_arg(arg, char *), len);
+	if (c == 'p')
+	{
+		ft_putstr("0x", len);
+		ft_puthex(va_arg(arg, unsigned long int), "0123456789abcdef", len);
+	}
+	if (c == 'i' || c == 'd')
+		ft_putnbr(va_arg(arg, int), len);
+	if (c == 'u')
+		ft_putunsigned(va_arg(arg, unsigned int), len);
+	if (c == 'x')
+		ft_puthex(va_arg(arg, unsigned int), "0123456789abcdef", len);
+	if (c == 'X')
+		ft_puthex(va_arg(arg, unsigned int), "0123456789ABCDEF", len);
+	if (c == '%')
+		ft_putchar('%', len);
 }
 
 int	ft_printf(char const *str, ...)
 {
-	int		len;
 	int		i;
+	int		len;
 	va_list	arg;
 
-	len = 0;
+	if (!str)
+		str = "(null)";
 	i = 0;
-	while (str[i])
+	len = 0;
+	va_start(arg, str);
+	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
-			len = conversion(arg, str[i++]);
 			i++;
+			conversion(str[i], arg, &len);
 		}
 		else
-			len = ft_putchar (str[i]);
+			ft_putchar(str[i], &len);
 		i++;
 	}
+	va_end(arg);
 	return (len);
 }

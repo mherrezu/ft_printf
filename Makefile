@@ -6,17 +6,16 @@
 #    By: mherrezu <mherrezu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 17:58:02 by mherrezu          #+#    #+#              #
-#    Updated: 2022/12/06 12:57:47 by mherrezu         ###   ########.fr        #
+#    Updated: 2022/12/08 14:03:57 by mherrezu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c ft_putnbr.c ft_putstr.c ft_putptr.c ft_putunsigned.c ft_puthex.c
+SRCS = ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c ft_puthex.c \
+		ft_putunsigned.c 
 
 OBJS = $(SRCS:.c=.o) 
-
-BOBJ = $(BONUS:.c=.o)
 
 CC = gcc
 
@@ -31,7 +30,7 @@ $(NAME): $(OBJS)
 			ar crs $(NAME) $(OBJS)
 
 clean:
-				$(RM) $(OBJS) $(BOBJ)
+				$(RM) $(OBJS)
 
 fclean: 	clean
 						$(RM) $(NAME)
